@@ -4,406 +4,392 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mala Difusión · difusión cultural independiente, Santiago de Chile</title>
-<meta name="description" content="Mala Difusión es un grupo independiente de Santiago de Chile que difunde todo tipo de expresión artística underground: música, teatro, literatura, artes visuales y contracultura. Sin fines comerciales.">
+<meta name="description" content="Mala Difusión es un grupo independiente de Santiago de Chile que difunde todo tipo de expresión artística underground: música, teatro, literatura, artes visuales y contracultura. Por amor al arte.">
 <meta property="og:title" content="Mala Difusión">
-<meta property="og:description" content="Difusión cultural independiente, por amor al arte. Santiago de Chile.">
+<meta property="og:description" content="Hacemos lo que nos gusta, cuando nos gusta. Por amor al arte. Santiago de Chile.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://maladifusion.cl">
 <link rel="icon" type="image/jpeg" href="logo-mala-difusion-circular.jpg">
 <link rel="apple-touch-icon" href="logo-mala-difusion-circular.jpg">
 <!--
-  NOTA PARA EDUARDO (borrar antes de publicar):
-  - Colores muestreados del logo real (crema #e6ded0, naranjo #c8591c, negro #0c0b0a). LISTO.
-  - Logo real usado en el hero (logo-mala-difusion.jpg) y como favicon (version circular).
-  - Instagram y TikTok siguen sin enlazar hasta confirmar los handles reales. [[PENDIENTE]]
-  - Los espacios de foto/video reales estan marcados con data-placeholder. [[PENDIENTE]]
+  NOTA (Eduardo): concepto 1950s / rockabilly, mucha animacion, poco texto.
+  El logo SIEMPRE es la imagen real (nunca texto imitando el logo).
+  Colores muestreados del logo: crema #e6ded0, naranjo #c8591c, negro #0c0b0a.
+  Pendiente: handles reales de Instagram/TikTok, fotos/videos reales del archivo.
 -->
 <style>
-  /* =========================================================
-     PALETA DE MARCA (bloqueada). HEX aproximados, reemplazar
-     con los valores exactos del logo real. [[PENDIENTE]]
-     ========================================================= */
   :root{
-    --negro:      #141210;   /* fondo grunge, off-black (logo real: #0c0b0a) */
-    --negro-2:    #1b1815;   /* superficie levemente elevada */
-    --negro-3:    #241f1b;   /* borde/linea sutil */
-    --crema:      #e6ded0;   /* crema "MALA", muestreado del logo real */
-    --crema-mute: #b3aa99;   /* texto secundario, pasa AA sobre negro */
-    --naranjo:    #c8591c;   /* acento unico: naranjo "DIFUSIÓN", logo real */
-    --naranjo-hi: #e06a24;   /* naranjo para hover/realces */
-    --foco:       #e06a24;   /* anillo de foco visible */
-    --maxw: 1200px;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --negro:#141210;
+    --negro-2:#1b1714;
+    --negro-3:#2a231d;
+    --crema:#e6ded0;
+    --crema-2:#d8cdb6;
+    --crema-mute:#b3aa99;
+    --naranjo:#c8591c;
+    --naranjo-hi:#e06a24;
+    --foco:#e06a24;
+    --maxw:1200px;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --pop:cubic-bezier(0.34,1.56,0.64,1);
+    --slab:"Rockwell","Roboto Slab","Bookman Old Style",Georgia,"Times New Roman",serif;
+    --impact:"Arial Narrow","Roboto Condensed",Impact,"Haettenschweiler",system-ui,sans-serif;
+    --script:"Snell Roundhand","Brush Script MT","Segoe Script",Georgia,cursive;
   }
-
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-
   body{
-    margin:0;
-    background:var(--negro);
-    color:var(--crema);
-    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
-    font-size:clamp(16px, 1.05vw + 14px, 18px);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-    overflow-x:hidden;
+    margin:0; background:var(--negro); color:var(--crema);
+    font-family:var(--slab);
+    font-size:clamp(16px,1vw+14px,18px); line-height:1.55;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-
-  /* Tipografia display: condensada, pesada, estilo afiche punk.
-     Sin fuentes externas: stack de sistema condensado. */
-  .display{
-    font-family:"Arial Narrow","Roboto Condensed","Oswald","Bebas Neue",
-                Impact,"Haettenschweiler",system-ui,sans-serif;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:-0.01em;
-    line-height:0.92;
-  }
-
   a{ color:var(--crema); text-decoration:none; }
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-    outline:2px solid var(--foco);
-    outline-offset:3px;
-  }
-
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--foco); outline-offset:3px; }
   img{ max-width:100%; display:block; }
+  .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:20px; position:relative; }
+  .display{ font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:-0.01em; line-height:0.9; }
 
-  .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:20px; }
+  /* ---------- Texturas de epoca ---------- */
+  .grain{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+  .halftone{ position:absolute; inset:0; pointer-events:none; opacity:0.12; z-index:0;
+    background-image:radial-gradient(var(--crema) 1.1px, transparent 1.3px);
+    background-size:11px 11px; }
+  .checker{ height:22px; width:100%;
+    background:
+      repeating-conic-gradient(var(--negro) 0deg 90deg, var(--naranjo) 90deg 180deg);
+    background-size:22px 22px; opacity:0.9; }
 
-  /* ---- Textura grunge: grano fijo, no bloquea el mouse ---- */
-  .grain{
-    position:fixed; inset:0; z-index:40; pointer-events:none; opacity:0.05;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    mix-blend-mode:overlay;
-  }
+  /* extruido retro para titulos */
+  .extru{ color:var(--crema);
+    text-shadow:
+      2px 2px 0 var(--naranjo), 3px 3px 0 var(--naranjo),
+      4px 4px 0 rgba(0,0,0,0.55); }
 
-  /* =========================  NAV  ========================= */
-  header.nav{
-    position:sticky; top:0; z-index:50;
-    background:color-mix(in srgb, var(--negro) 88%, transparent);
-    backdrop-filter:saturate(140%) blur(8px);
-    border-bottom:1px solid var(--negro-3);
-  }
-  .nav-inner{ display:flex; align-items:center; gap:16px; height:66px; }
-  .brand{ display:flex; align-items:center; gap:10px; }
-  .brand svg{ width:26px; height:26px; }
-  .brand .mark{ font-size:20px; letter-spacing:0.02em; }
-  .brand .mark .di{ color:var(--naranjo); }
-  .nav-links{ margin-left:auto; display:flex; align-items:center; gap:26px; }
-  .nav-links a{ color:var(--crema-mute); font-size:14px; letter-spacing:0.04em; text-transform:uppercase; transition:color .2s var(--ease); }
+  /* ---------- Estrella / sunburst ---------- */
+  .sunburst{ position:absolute; inset:-40% -20%; z-index:0; pointer-events:none; opacity:0.14;
+    background:repeating-conic-gradient(from 0deg at 50% 45%, var(--crema) 0deg 6deg, transparent 6deg 12deg);
+    -webkit-mask-image:radial-gradient(closest-side, #000 60%, transparent 100%);
+    mask-image:radial-gradient(closest-side, #000 60%, transparent 100%); }
+  .star{ display:inline-block; background:var(--naranjo);
+    clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+  .burst{ position:absolute; width:120px; height:120px; z-index:1; pointer-events:none;
+    background:repeating-conic-gradient(var(--naranjo) 0deg 12deg, transparent 12deg 24deg);
+    border-radius:50%;
+    -webkit-mask-image:radial-gradient(closest-side,#000 62%, transparent 66%);
+    mask-image:radial-gradient(closest-side,#000 62%, transparent 66%); }
+
+  /* ---------- NAV ---------- */
+  header.nav{ position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--negro) 90%, transparent);
+    backdrop-filter:saturate(140%) blur(8px); border-bottom:2px solid var(--negro-3); }
+  .nav-inner{ display:flex; align-items:center; gap:16px; height:70px; }
+  .brand-badge{ width:48px; height:48px; border-radius:50%; overflow:hidden; flex:0 0 auto;
+    border:2px solid var(--naranjo); box-shadow:0 0 0 2px var(--negro), 3px 3px 0 rgba(0,0,0,0.5); background:var(--negro); }
+  .brand-badge img{ width:100%; height:100%; object-fit:cover; transform:scale(1.16); }
+  .nav-links{ margin-left:auto; display:flex; align-items:center; gap:24px; }
+  .nav-links a{ color:var(--crema-mute); font-family:var(--slab); font-size:14px; letter-spacing:0.03em; text-transform:uppercase; transition:color .2s var(--ease); }
   .nav-links a:hover{ color:var(--crema); }
-  .btn{
-    display:inline-block; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;
-    font-size:14px; padding:11px 18px; border:2px solid transparent; cursor:pointer;
-    transition:transform .12s var(--ease), background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
-  }
-  .btn:active{ transform:translateY(1px); }
-  .btn-primary{ background:var(--crema); color:var(--negro); }
-  .btn-primary:hover{ background:var(--naranjo-hi); color:var(--negro); }
-  .btn-ghost{ background:transparent; color:var(--crema); border-color:var(--negro-3); }
-  .btn-ghost:hover{ border-color:var(--naranjo); color:var(--naranjo-hi); }
-  .nav-cta{ margin-left:4px; }
-  @media (max-width:720px){
-    .nav-links a:not(.nav-cta){ display:none; }
-  }
+  .btn{ display:inline-block; font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:0.04em;
+    font-size:15px; padding:12px 20px; cursor:pointer; border:2px solid var(--negro);
+    transition:transform .12s var(--pop), box-shadow .12s var(--ease); }
+  .btn-primary{ background:var(--naranjo); color:var(--negro); box-shadow:4px 4px 0 rgba(0,0,0,0.55); }
+  .btn-primary:hover{ background:var(--naranjo-hi); transform:translate(-1px,-1px); box-shadow:6px 6px 0 rgba(0,0,0,0.55); }
+  .btn-cream{ background:var(--crema); color:var(--negro); box-shadow:4px 4px 0 rgba(0,0,0,0.55); }
+  .btn-cream:hover{ transform:translate(-1px,-1px); box-shadow:6px 6px 0 rgba(0,0,0,0.55); }
+  @media (max-width:760px){ .nav-links a:not(.nav-cta){ display:none; } }
 
-  /* =========================  HERO  ======================== */
-  .hero{ position:relative; min-height:calc(100dvh - 66px); display:flex; align-items:center; padding:48px 0 64px; }
-  .hero .wrap{ width:100%; }
-  .hero .eyebrow{ color:var(--naranjo); font-size:14px; letter-spacing:0.22em; text-transform:uppercase; margin:0 0 18px; }
-  .hero-logo-wrap{ margin:0; max-width:min(88vw, 680px); }
-  /* El logo es un JPG con fondo negro grunge. mix-blend-mode:lighten funde
-     las zonas oscuras con la pagina; la mascara difumina el borde del recuadro
-     para que no se vea la caja del JPG (el texto no llega a los bordes). */
-  .hero-logo{
-    width:100%; height:auto; mix-blend-mode:lighten;
+  /* ---------- HERO ---------- */
+  .hero{ position:relative; min-height:calc(100dvh - 70px); display:flex; align-items:center; padding:36px 0 60px; overflow:hidden; }
+  .hero .wrap{ text-align:center; }
+  .hero .kicker{ font-family:var(--script); font-size:clamp(22px,3vw,34px); color:var(--naranjo-hi); margin:0 0 6px; transform:rotate(-3deg); }
+  .hero-logo-wrap{ margin:0 auto; max-width:min(90vw,720px); position:relative; }
+  .hero-logo{ width:100%; height:auto; mix-blend-mode:lighten;
     -webkit-mask-image:
       linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
       linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
     mask-image:
       linear-gradient(to right, transparent 0, #000 5%, #000 95%, transparent 100%),
       linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
-    -webkit-mask-composite:source-in;
-    mask-composite:intersect;
-  }
-  .hero .lema{
-    margin:26px 0 0; max-width:40ch;
-    font-size:clamp(20px, 2.4vw, 30px); font-style:italic; line-height:1.25; color:var(--crema);
-  }
-  .hero .lema b{ color:var(--naranjo-hi); font-style:normal; font-weight:700; }
-  .hero-cta{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; }
-  .hero .wrap > *{ position:relative; z-index:1; }
+    -webkit-mask-composite:source-in; mask-composite:intersect; }
+  .lema{ font-family:var(--script); font-size:clamp(24px,4.4vw,46px); color:var(--crema);
+    margin:14px auto 0; max-width:22ch; line-height:1.1; }
+  .lema b{ color:var(--naranjo-hi); }
+  .hero-cta{ margin-top:26px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .hero .burst.b1{ top:8%; left:6%; }
+  .hero .burst.b2{ bottom:14%; right:7%; width:80px; height:80px; }
+  .fly-star{ position:absolute; width:34px; height:34px; z-index:1; pointer-events:none; }
 
-  /* =====================  MANIFIESTO  ===================== */
-  .manifiesto{ border-top:1px solid var(--negro-3); padding:88px 0; }
-  .manifiesto .kicker{ color:var(--naranjo); text-transform:uppercase; letter-spacing:0.2em; font-size:13px; margin:0 0 20px; }
-  .manifiesto p{ font-size:clamp(22px, 2.6vw, 34px); line-height:1.35; max-width:24ch; margin:0; font-weight:600; }
-  .manifiesto .body{ margin-top:28px; max-width:62ch; color:var(--crema-mute); font-size:clamp(16px,1.1vw,19px); line-height:1.7; font-weight:400; }
-  .manifiesto .body strong{ color:var(--crema); font-weight:600; }
+  /* ---------- MANIFIESTO ---------- */
+  .manifiesto{ position:relative; background:var(--negro-2); border-block:2px solid var(--negro-3); padding:84px 0; overflow:hidden; }
+  .stamps{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:0 0 26px; }
+  .stamp{ font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:0.06em;
+    font-size:15px; color:var(--crema); border:2px dashed var(--naranjo); padding:8px 14px; transform:rotate(-2deg);
+    background:rgba(200,89,28,0.08); }
+  .stamp:nth-child(2){ transform:rotate(1.5deg); }
+  .stamp:nth-child(3){ transform:rotate(-1deg); }
+  .manifiesto h2{ margin:0 auto; text-align:center; max-width:16ch;
+    font-size:clamp(44px,8vw,110px); }
+  .manifiesto .say{ text-align:center; max-width:44ch; margin:22px auto 0; font-size:clamp(17px,1.6vw,21px); color:var(--crema-2); }
 
-  /* =====================  QUE HACEMOS  ==================== */
-  .hacemos{ background:var(--negro-2); border-top:1px solid var(--negro-3); padding:88px 0; }
-  .sec-head h2{ margin:0; font-size:clamp(40px, 6vw, 76px); }
-  .sec-head p{ margin:14px 0 0; color:var(--crema-mute); max-width:56ch; }
-  .grid-formatos{ margin-top:44px; display:grid; gap:14px; grid-template-columns:repeat(6,1fr); }
-  .cell{ border:1px solid var(--negro-3); padding:26px; display:flex; flex-direction:column; justify-content:space-between; min-height:150px; background:var(--negro); }
-  .cell h3{ margin:0 0 8px; font-size:22px; }
-  .cell p{ margin:0; color:var(--crema-mute); font-size:15px; }
-  .cell .num{ font-family:"Arial Narrow",system-ui,sans-serif; color:var(--negro-3); font-weight:800; font-size:52px; line-height:1; align-self:flex-end; }
-  .cell.feat{ background:var(--naranjo); color:var(--negro); grid-column:span 3; grid-row:span 2; min-height:260px; }
-  .cell.feat h3{ font-size:clamp(28px,3.2vw,40px); }
-  .cell.feat p{ color:color-mix(in srgb, var(--negro) 78%, transparent); font-size:16px; }
-  .cell.feat svg{ width:56px; height:56px; color:var(--negro); }
-  .cell.half{ grid-column:span 3; }
-  .cell.tri{ grid-column:span 2; }
-  @media (max-width:820px){
-    .grid-formatos{ grid-template-columns:repeat(2,1fr); }
-    .cell.feat, .cell.half, .cell.tri{ grid-column:span 2; grid-row:auto; min-height:auto; }
-  }
+  /* ---------- SECCION generica ---------- */
+  .sec{ position:relative; padding:84px 0; overflow:hidden; border-bottom:2px solid var(--negro-3); }
+  .sec-head{ text-align:center; margin-bottom:44px; }
+  .sec-head .eye{ font-family:var(--script); font-size:clamp(20px,2.4vw,30px); color:var(--naranjo-hi); display:block; transform:rotate(-2deg); }
+  .sec-head h2{ margin:6px 0 0; font-size:clamp(40px,7vw,86px); }
 
-  /* ======================  ARCHIVO  ====================== */
-  .archivo{ border-top:1px solid var(--negro-3); padding:88px 0; }
-  .archivo-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .archivo .kicker{ color:var(--naranjo); text-transform:uppercase; letter-spacing:0.2em; font-size:13px; margin:0 0 16px; }
-  .archivo h2{ margin:0; font-size:clamp(38px,5vw,64px); }
-  .archivo p{ color:var(--crema-mute); max-width:52ch; }
-  .fests{ display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 28px; }
-  .fest{ border:1px solid var(--naranjo); color:var(--naranjo-hi); text-transform:uppercase; letter-spacing:0.04em; font-size:13px; font-weight:700; padding:8px 12px; }
-  .media-slot{
-    aspect-ratio:4/3; border:2px dashed var(--negro-3); background:
-      repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(200,83,31,0.05) 12px, rgba(200,83,31,0.05) 13px);
-    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;
-  }
-  .media-slot span{ color:var(--crema-mute); font-size:14px; max-width:26ch; }
+  /* laminas / tickets que vuelan */
+  .laminas{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .lamina{ background:var(--crema); color:var(--negro); border:3px solid var(--negro);
+    box-shadow:6px 6px 0 rgba(0,0,0,0.55); padding:22px 20px; min-height:150px;
+    display:flex; flex-direction:column; justify-content:space-between; }
+  .lamina:nth-child(odd){ transform:rotate(-1.4deg); }
+  .lamina:nth-child(even){ transform:rotate(1.4deg); }
+  .lamina .tag{ font-family:var(--impact); font-weight:800; text-transform:uppercase; font-size:13px; letter-spacing:0.08em; color:var(--naranjo); }
+  .lamina h3{ font-family:var(--impact); font-weight:800; text-transform:uppercase; margin:8px 0 0; font-size:clamp(22px,3vw,30px); line-height:0.95; }
+  .lamina .star{ width:26px; height:26px; align-self:flex-end; }
+  .lamina.hot{ background:var(--naranjo); }
+  .lamina.hot .tag{ color:var(--negro); }
+  .lamina.hot .star{ background:var(--negro); }
+  @media (max-width:820px){ .laminas{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .laminas{ grid-template-columns:1fr; } }
+
+  /* archivo */
+  .archivo-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center; }
+  .archivo h2{ font-size:clamp(40px,6vw,74px); margin:0; }
+  .archivo p{ color:var(--crema-2); max-width:44ch; }
+  .stamps-fest{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 26px; }
+  .fest{ font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:0.03em; font-size:14px;
+    color:var(--crema); background:var(--negro); border:2px solid var(--naranjo); padding:10px 14px; transform:rotate(-2deg);
+    box-shadow:3px 3px 0 rgba(0,0,0,0.5); }
+  .fest:nth-child(2){ transform:rotate(1.5deg); }
+  .fest:nth-child(3){ transform:rotate(-1deg); }
+  .tv{ background:var(--crema); border:4px solid var(--negro); box-shadow:8px 8px 0 rgba(0,0,0,0.55); padding:16px; }
+  .tv .screen{ aspect-ratio:4/3; background:
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 3px, transparent 3px 6px),
+      radial-gradient(120% 120% at 50% 20%, #201a15, #0c0b0a);
+    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; border:2px solid var(--negro); }
+  .tv .screen span{ color:var(--crema-mute); font-size:14px; max-width:24ch; }
+  .tv .knobs{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+  .tv .knobs i{ width:16px; height:16px; border-radius:50%; background:var(--negro); display:block; }
   @media (max-width:820px){ .archivo-grid{ grid-template-columns:1fr; } }
 
-  /* =====================  CARTELERA  ===================== */
-  .cartelera{ background:var(--negro-2); border-top:1px solid var(--negro-3); padding:88px 0; }
-  .cartelera-inner{ text-align:center; max-width:640px; margin-inline:auto; }
-  .cartelera h2{ margin:0 0 8px; font-size:clamp(40px,6vw,72px); }
-  .cartelera .empty{
-    margin-top:26px; border:1px solid var(--negro-3); padding:44px 24px;
-  }
-  .cartelera .empty .big{ display:block; font-size:22px; color:var(--crema); margin-bottom:8px; font-weight:600; }
-  .cartelera .empty small{ color:var(--crema-mute); font-size:15px; }
-  .cartelera .empty .link{ display:inline-block; margin-top:18px; }
+  /* cartelera */
+  .cartelera{ text-align:center; }
+  .marquee-ticket{ max-width:640px; margin:0 auto; background:var(--crema); color:var(--negro);
+    border:3px solid var(--negro); box-shadow:8px 8px 0 rgba(0,0,0,0.55); padding:40px 26px; position:relative; }
+  .marquee-ticket .big{ font-family:var(--impact); font-weight:800; text-transform:uppercase; font-size:clamp(30px,5vw,52px); line-height:0.95; }
+  .marquee-ticket small{ display:block; margin-top:12px; color:#5a5346; font-size:15px; }
+  .perf{ position:absolute; top:0; bottom:0; width:14px; background:
+      radial-gradient(circle at center, var(--negro) 40%, transparent 42%) 0 0/14px 20px repeat-y; }
+  .perf.l{ left:-2px; } .perf.r{ right:-2px; }
 
-  /* =====================  COMUNIDAD  ===================== */
-  .comunidad{ border-top:1px solid var(--negro-3); padding:88px 0; }
-  .comunidad-inner{ display:grid; grid-template-columns:auto 1fr; gap:40px; align-items:center; }
-  .stat .n{ font-size:clamp(72px,12vw,150px); color:var(--naranjo); line-height:0.85; }
-  .stat .l{ text-transform:uppercase; letter-spacing:0.16em; font-size:13px; color:var(--crema-mute); margin-top:8px; }
-  .comunidad h2{ margin:0 0 14px; font-size:clamp(32px,4vw,52px); }
-  .comunidad p{ color:var(--crema-mute); max-width:52ch; margin:0 0 24px; }
-  @media (max-width:720px){ .comunidad-inner{ grid-template-columns:1fr; gap:20px; } }
+  /* comunidad */
+  .comu{ display:grid; grid-template-columns:auto 1fr; gap:44px; align-items:center; }
+  .odo{ background:var(--negro); border:3px solid var(--naranjo); box-shadow:8px 8px 0 rgba(0,0,0,0.55); padding:18px 22px; text-align:center; }
+  .odo .n{ font-family:var(--impact); font-weight:800; color:var(--naranjo-hi); font-size:clamp(56px,11vw,120px); line-height:0.85; }
+  .odo .l{ font-family:var(--impact); text-transform:uppercase; letter-spacing:0.14em; font-size:13px; color:var(--crema-mute); margin-top:8px; }
+  .comu h2{ font-size:clamp(32px,5vw,64px); margin:0 0 12px; }
+  .comu p{ color:var(--crema-2); max-width:46ch; margin:0 0 22px; }
+  @media (max-width:720px){ .comu{ grid-template-columns:1fr; gap:24px; text-align:center; } .odo{ justify-self:center; } }
 
-  /* =====================  CONTACTO  ====================== */
-  .contacto{ background:var(--negro-2); border-top:1px solid var(--negro-3); padding:88px 0; }
-  .contacto-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
-  .canales{ list-style:none; margin:22px 0 0; padding:0; }
-  .canales li{ border-top:1px solid var(--negro-3); padding:14px 0; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .canales li:last-child{ border-bottom:1px solid var(--negro-3); }
-  .canales .k{ color:var(--crema-mute); text-transform:uppercase; letter-spacing:0.08em; font-size:13px; }
-  .canales .v a, .canales .v span{ color:var(--crema); }
-  .canales .v a:hover{ color:var(--naranjo-hi); }
-  .canales .v .por-confirmar{ color:var(--crema-mute); font-style:italic; }
+  /* contacto */
+  .contacto h2{ font-size:clamp(38px,6vw,72px); margin:0; }
+  .contacto .low{ color:var(--crema-2); max-width:52ch; margin:14px 0 0; }
+  .card{ margin-top:28px; background:var(--crema); color:var(--negro); border:3px solid var(--negro);
+    box-shadow:8px 8px 0 rgba(0,0,0,0.55); padding:8px 24px; max-width:720px; transform:rotate(-0.6deg); }
+  .canales{ list-style:none; margin:0; padding:0; }
+  .canales li{ border-bottom:2px dashed rgba(0,0,0,0.25); padding:14px 0; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .canales li:last-child{ border-bottom:0; }
+  .canales .k{ font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:0.06em; font-size:14px; color:var(--naranjo); }
+  .canales .v a{ color:var(--negro); }
+  .canales .v a:hover{ color:var(--naranjo); }
+  .canales .v .por-confirmar{ color:#7a7264; font-style:italic; }
 
-  form .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
-  form label{ font-size:13px; text-transform:uppercase; letter-spacing:0.08em; color:var(--crema-mute); }
-  form input, form textarea{
-    background:var(--negro); border:1px solid var(--negro-3); color:var(--crema);
-    padding:12px 14px; font:inherit; font-size:16px;
-  }
-  form input::placeholder, form textarea::placeholder{ color:#8f887a; }
-  form input:focus, form textarea:focus{ border-color:var(--naranjo); outline:none; }
-  form .hint{ font-size:13px; color:var(--crema-mute); }
-  .form-status{ margin-top:6px; font-size:15px; min-height:1.2em; }
-  .form-status.ok{ color:var(--naranjo-hi); }
-  .form-status.err{ color:#ff8a6b; }
-  @media (max-width:820px){ .contacto-grid{ grid-template-columns:1fr; gap:36px; } }
+  /* footer */
+  footer.site{ padding:0 0 44px; }
+  .foot-inner{ padding-top:40px; display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:center; }
+  .foot-brand{ display:flex; align-items:center; gap:14px; }
+  .foot-brand .brand-badge{ width:60px; height:60px; }
+  .foot-brand .lm{ font-family:var(--script); font-size:22px; color:var(--crema); max-width:16ch; }
+  .foot-meta{ color:var(--crema-mute); font-family:var(--impact); text-transform:uppercase; letter-spacing:0.08em; font-size:13px; text-align:right; }
 
-  /* ======================  FOOTER  ====================== */
-  footer.site{ border-top:1px solid var(--negro-3); padding:48px 0; }
-  .foot-inner{ display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:flex-end; }
-  .foot-brand{ display:flex; align-items:center; gap:10px; }
-  .foot-brand svg{ width:24px; height:24px; color:var(--naranjo); }
-  .foot-brand .mark{ font-size:20px; }
-  .foot-brand .mark .di{ color:var(--naranjo); }
-  .foot-meta{ color:var(--crema-mute); font-size:14px; text-align:right; }
-  .foot-meta em{ color:var(--crema); font-style:italic; }
-
-  /* ==================  REVELADO AL SCROLL  ============== */
+  /* ---------- ANIMACION: vuelo / despliegue ---------- */
   @media (prefers-reduced-motion: no-preference){
-    .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
-    .reveal.in{ opacity:1; transform:none; }
+    .fly{ opacity:0; transition:opacity .7s var(--ease), transform .8s var(--pop); transition-delay:var(--d,0ms); will-change:transform,opacity; }
+    .fly.up{ transform:translateY(40px); }
+    .fly.left{ transform:translateX(-70px) rotate(-8deg); }
+    .fly.right{ transform:translateX(70px) rotate(8deg); }
+    .fly.pop{ transform:scale(0.7) rotate(-6deg); }
+    .fly.drop{ transform:translateY(-60px) rotate(6deg); }
+    .fly.in{ opacity:1; transform:none; }
+    .lamina.fly.in:nth-child(odd){ transform:rotate(-1.4deg); }
+    .lamina.fly.in:nth-child(even){ transform:rotate(1.4deg); }
+
+    .spin{ animation:spin 18s linear infinite; }
+    .spin-slow{ animation:spin 30s linear infinite; }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+    .float{ animation:float 5s ease-in-out infinite; }
+    @keyframes float{ 0%,100%{ transform:translateY(0) rotate(-6deg); } 50%{ transform:translateY(-12px) rotate(4deg); } }
+    .hero-logo.in-logo{ animation:slam .7s var(--pop) both; }
+    @keyframes slam{ 0%{ transform:scale(1.25); opacity:0; } 100%{ transform:scale(1); opacity:1; } }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fly{ opacity:1 !important; transform:none !important; }
   }
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- ============================ NAV ============================ -->
+<!-- ===================== NAV ===================== -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Mala Difusión, inicio">
-      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M8 26 L34 16 L34 48 L8 38 Z" fill="currentColor" opacity="0.9"/>
-        <path d="M34 20 C46 22 52 27 52 32 C52 37 46 42 34 44 Z" fill="var(--naranjo)"/>
-        <rect x="14" y="38" width="7" height="14" fill="currentColor"/>
-        <path d="M46 20 L58 14 M48 32 L60 32 M46 44 L58 50" stroke="var(--naranjo)" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <span class="display mark">MALA<span class="di">DIFUSIÓN</span></span>
+    <a class="brand-badge" href="#top" aria-label="Mala Difusión, inicio">
+      <img src="logo-mala-difusion-circular.jpg" alt="Mala Difusión" width="64" height="64">
     </a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="#manifiesto">Manifiesto</a>
+      <a href="#manifiesto">Quiénes</a>
       <a href="#hacemos">Qué hacemos</a>
       <a href="#archivo">Archivo</a>
-      <a href="#contacto">Contacto</a>
-      <a class="btn btn-primary nav-cta" href="#comunidad">Comunidad</a>
+      <a href="#contacto">Dónde andamos</a>
+      <a class="btn btn-primary nav-cta" href="#comunidad">La comunidad</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
 
-<!-- ============================ HERO ============================ -->
+<!-- ===================== HERO ===================== -->
 <section class="hero">
+  <div class="sunburst spin-slow" aria-hidden="true"></div>
+  <div class="halftone" aria-hidden="true"></div>
+  <div class="burst b1 spin" aria-hidden="true"></div>
+  <div class="burst b2 spin-slow" aria-hidden="true"></div>
+  <span class="star fly-star float" style="top:18%; right:12%;" aria-hidden="true"></span>
+  <span class="star fly-star float" style="bottom:20%; left:9%; width:26px; height:26px; animation-delay:1.2s;" aria-hidden="true"></span>
   <div class="wrap">
-    <p class="eyebrow">Difusión cultural independiente · Santiago de Chile</p>
+    <p class="kicker fly drop">Directo desde el underground de Santiago</p>
     <h1 class="hero-logo-wrap">
       <img class="hero-logo" src="logo-mala-difusion.jpg" alt="Mala Difusión" width="819" height="543">
     </h1>
-    <p class="lema">No somos los mejores, pero somos los <b>más guapos.</b></p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#comunidad">Súmate a la comunidad</a>
-      <a class="btn btn-ghost" href="#archivo">Ver la cobertura</a>
+    <p class="lema fly up" style="--d:120ms;">No somos los mejores, pero somos los <b>más guapos.</b></p>
+    <div class="hero-cta fly up" style="--d:240ms;">
+      <a class="btn btn-primary" href="#archivo">Ver la movida</a>
+      <a class="btn btn-cream" href="#comunidad">La comunidad</a>
     </div>
   </div>
 </section>
 
-<!-- ========================= MANIFIESTO ========================= -->
-<section class="manifiesto reveal" id="manifiesto">
+<!-- ===================== MANIFIESTO ===================== -->
+<section class="manifiesto" id="manifiesto">
+  <div class="sunburst spin-slow" aria-hidden="true" style="opacity:0.08;"></div>
   <div class="wrap">
-    <p class="kicker">Qué es Mala Difusión</p>
-    <p>No somos prensa ni un negocio. Somos un grupo de gente que ama todo tipo de expresión artística y la difunde por puro gusto.</p>
-    <div class="body">
-      <p>No tenemos periodistas ni fines comerciales, y no estamos a disposición de trabajar para nadie. Lo que hacemos, lo hacemos solo para difundir. Privilegiamos la <strong>independencia, la autogestión y la libertad de expresión</strong>, y damos espacio tanto a artistas emergentes como a creadores de larga trayectoria, sin distinguir por nivel de reconocimiento ni éxito comercial.</p>
-      <p>Entendemos la cultura como <strong>herramienta de transformación social</strong> y creemos que toda manifestación artística honesta merece ser difundida. La contracultura no es un género: es el conjunto de expresiones que cuestionan los modelos dominantes y defienden el derecho de todas las personas a crear y compartir su obra sin depender de las estructuras tradicionales de difusión.</p>
+    <div class="stamps">
+      <span class="stamp fly pop">Sin pauta</span>
+      <span class="stamp fly pop" style="--d:100ms;">Sin jefe</span>
+      <span class="stamp fly pop" style="--d:200ms;">Sin filtro</span>
     </div>
+    <h2 class="display extru fly up">Hacemos lo que nos gusta, cuando nos gusta</h2>
+    <p class="say fly up" style="--d:120ms;">Puro amor al arte. No le rendimos cuentas a nadie, no trabajamos para nadie y no necesitamos que nadie nos pida nada. Difundimos porque se nos da la gana.</p>
   </div>
 </section>
 
-<!-- ========================= QUE HACEMOS ========================= -->
-<section class="hacemos" id="hacemos">
+<!-- ===================== QUE HACEMOS ===================== -->
+<section class="sec" id="hacemos">
+  <div class="halftone" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="display">Qué hacemos</h2>
-      <p>Registro audiovisual de la escena independiente: música, teatro, literatura, artes visuales, intervenciones urbanas y actividades comunitarias. Directo, cercano y sin humo.</p>
+    <div class="sec-head fly up">
+      <span class="eye">Lo que hacemos</span>
+      <h2 class="display">La movida, registrada</h2>
     </div>
-    <div class="grid-formatos">
-      <div class="cell feat reveal">
-        <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
-          <path d="M8 26 L34 16 L34 48 L8 38 Z"/>
-          <path d="M34 20 C46 22 52 27 52 32 C52 37 46 42 34 44 Z"/>
-          <rect x="14" y="38" width="7" height="14"/>
-        </svg>
-        <div>
-          <h3 class="display">Cobertura audiovisual completa</h3>
-          <p>Videos completos de tocatas, festivales y montajes. Fotografía y entrevistas a la escena.</p>
-        </div>
-      </div>
-      <div class="cell half reveal">
-        <h3 class="display">Cobertura en vivo</h3>
-        <p>Registro en tiempo real de conciertos, encuentros y manifestaciones.</p>
-      </div>
-      <div class="cell half reveal">
-        <h3 class="display">Clips y post-evento</h3>
-        <p>Piezas cortas y publicaciones después de cada cobertura.</p>
-      </div>
-      <div class="cell tri reveal">
-        <h3 class="display">Afiches</h3>
-        <p>Gráfica de eventos y convocatorias.</p>
-      </div>
-      <div class="cell tri reveal">
-        <h3 class="display">Concursos y sorteos</h3>
-        <p>Entradas para la escena, con mecánica de participación en redes.</p>
-      </div>
-      <div class="cell tri reveal">
-        <h3 class="display">Entrevistas</h3>
-        <p>Voces de artistas y gestores.</p>
-      </div>
+    <div class="laminas">
+      <div class="lamina hot fly pop"><span class="tag">En vivo</span><h3>Tocatas completas</h3><span class="star"></span></div>
+      <div class="lamina fly pop" style="--d:80ms;"><span class="tag">Festivales</span><h3>Cobertura entera</h3><span class="star"></span></div>
+      <div class="lamina fly pop" style="--d:160ms;"><span class="tag">Cara a cara</span><h3>Entrevistas</h3><span class="star"></span></div>
+      <div class="lamina fly pop" style="--d:240ms;"><span class="tag">A pulso</span><h3>Fotografía</h3><span class="star"></span></div>
+      <div class="lamina fly pop" style="--d:320ms;"><span class="tag">Gráfica</span><h3>Afiches</h3><span class="star"></span></div>
+      <div class="lamina hot fly pop" style="--d:400ms;"><span class="tag">Regalamos</span><h3>Sorteos de entradas</h3><span class="star"></span></div>
     </div>
   </div>
 </section>
 
-<!-- ========================== ARCHIVO ========================== -->
-<section class="archivo" id="archivo">
+<!-- ===================== ARCHIVO ===================== -->
+<section class="sec archivo" id="archivo">
   <div class="wrap archivo-grid">
-    <div class="reveal">
-      <p class="kicker">Archivo y cobertura</p>
-      <h2 class="display">La música es lo más documentado</h2>
-      <p>Tocatas completas, festivales, backstages y entrevistas de la escena punk, ska, rock, hardcore y metal chilena. Todo el archivo vive en el canal de YouTube.</p>
-      <div class="fests" aria-label="Festivales cubiertos">
+    <div class="fly left">
+      <span class="eye" style="font-family:var(--script);font-size:clamp(20px,2.4vw,30px);color:var(--naranjo-hi);display:block;transform:rotate(-2deg);">El archivo</span>
+      <h2 class="display">Todo vive en YouTube</h2>
+      <p>Tocatas completas, festivales, backstages y entrevistas de la escena punk, ska, rock, hardcore y metal chilena.</p>
+      <div class="stamps-fest">
         <span class="fest">Fullpro Fest</span>
         <span class="fest">Barricada Fest</span>
-        <span class="fest">Gran Bienal de Santiago 2024</span>
+        <span class="fest">Gran Bienal 2024</span>
       </div>
-      <a class="btn btn-primary" href="https://www.youtube.com/@SomosMalaDifusion" target="_blank" rel="noopener">Ver el canal en YouTube</a>
+      <a class="btn btn-primary" href="https://www.youtube.com/@SomosMalaDifusion" target="_blank" rel="noopener">Ir al canal</a>
     </div>
-    <div class="reveal">
-      <!-- [[PENDIENTE: reemplazar por videos o fotos reales que aporte Eduardo]] -->
-      <div class="media-slot" data-placeholder="video-o-foto-real">
-        <span>Espacio para un video o foto real de una cobertura. Pendiente de material que aporte el equipo.</span>
+    <div class="fly right">
+      <div class="tv">
+        <div class="screen">
+          <!-- [[PENDIENTE: reemplazar por un video o foto real de una cobertura]] -->
+          <span>Aquí va un video o una foto real de una cobertura. Pendiente de material del equipo.</span>
+        </div>
+        <div class="knobs" aria-hidden="true"><i></i><i></i></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========================= CARTELERA ========================= -->
-<section class="cartelera" id="cartelera">
-  <div class="wrap cartelera-inner reveal">
-    <p class="kicker" style="color:var(--naranjo);text-transform:uppercase;letter-spacing:0.2em;font-size:13px;margin:0 0 8px;">Cartelera</p>
-    <h2 class="display">Próximas tocatas</h2>
-    <div class="empty">
-      <span class="big">Pronto, la próxima cartelera.</span>
-      <small>Cuando haya fechas confirmadas, aparecen aquí. La escena de Santiago se mueve en el grupo de avisos de tocatas.</small>
-      <a class="btn btn-ghost link" href="#comunidad">Ir a la comunidad</a>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= COMUNIDAD ========================= -->
-<section class="comunidad" id="comunidad">
-  <div class="wrap comunidad-inner">
-    <div class="stat reveal">
-      <div class="display n">14.900</div>
-      <div class="l">miembros en el grupo</div>
-    </div>
-    <div class="reveal">
-      <h2 class="display">Una comunidad, no una audiencia</h2>
-      <p>Con los años, Mala Difusión se volvió una plataforma de apoyo para artistas, gestores culturales, organizaciones sociales y espacios independientes. El grupo público de Facebook reúne a la escena para compartir avisos, tocatas y convocatorias.</p>
-      <a class="btn btn-primary" href="https://www.facebook.com/groups/maladifusion/" target="_blank" rel="noopener">Entrar al grupo de Facebook</a>
-    </div>
-  </div>
-</section>
-
-<!-- ========================= CONTACTO ========================= -->
-<section class="contacto" id="contacto">
+<!-- ===================== CARTELERA ===================== -->
+<section class="sec cartelera" id="cartelera">
+  <div class="halftone" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="reveal" style="max-width:780px;">
-      <h2 class="display" style="font-size:clamp(40px,5vw,64px);margin:0;">Dónde encontrarnos</h2>
-      <p style="color:var(--crema-mute);max-width:54ch;margin:14px 0 0;">No trabajamos para nadie ni buscamos clientes. Difundimos por amor al arte, sin fines comerciales. No andamos pidiendo que nos escriban, pero si quieres saludar o mostrarnos algo, por aquí andamos.</p>
+    <div class="sec-head fly up">
+      <span class="eye">Cartelera</span>
+      <h2 class="display">Próximas tocatas</h2>
+    </div>
+    <div class="marquee-ticket fly pop">
+      <span class="perf l" aria-hidden="true"></span>
+      <span class="perf r" aria-hidden="true"></span>
+      <div class="big">Pronto, la próxima</div>
+      <small>Cuando haya fecha confirmada, aparece aquí. La escena se mueve en el grupo.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMUNIDAD ===================== -->
+<section class="sec" id="comunidad">
+  <div class="sunburst spin-slow" aria-hidden="true" style="opacity:0.08;"></div>
+  <div class="wrap comu">
+    <div class="odo fly left">
+      <div class="n">14.900</div>
+      <div class="l">en el grupo</div>
+    </div>
+    <div class="fly right">
+      <h2 class="display extru">La banda somos todos</h2>
+      <p>Artistas, gestores, espacios y curiosos de la escena. El grupo público de Facebook es donde se comparte todo: avisos, tocatas y convocatorias.</p>
+      <a class="btn btn-primary" href="https://www.facebook.com/groups/maladifusion/" target="_blank" rel="noopener">Entrar al grupo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACTO ===================== -->
+<section class="sec contacto" id="contacto">
+  <div class="wrap">
+    <div class="fly up" style="max-width:780px;">
+      <span class="eye" style="font-family:var(--script);font-size:clamp(20px,2.4vw,30px);color:var(--naranjo-hi);display:block;transform:rotate(-2deg);">Dónde andamos</span>
+      <h2 class="display">Aquí nos pillas</h2>
+      <p class="low">Difundimos por amor al arte, cuando se nos da la gana. No andamos pidiendo que nos escriban. Pero si quieres saludar o mostrarnos algo, por aquí andamos.</p>
+    </div>
+    <div class="card fly up" style="--d:120ms;">
       <ul class="canales">
         <li><span class="k">Correo</span><span class="v"><a href="mailto:somosmaladifusion@gmail.com">somosmaladifusion@gmail.com</a></span></li>
         <li><span class="k">Teléfono</span><span class="v"><a href="tel:+56927690949">+56 9 2769 0949</a></span></li>
         <li><span class="k">Sitio</span><span class="v"><a href="https://maladifusion.cl" target="_blank" rel="noopener">maladifusion.cl</a></span></li>
         <li><span class="k">Facebook</span><span class="v"><a href="https://www.facebook.com/MalaDifusion.cl" target="_blank" rel="noopener">/MalaDifusion.cl</a></span></li>
-        <li><span class="k">Grupo</span><span class="v"><a href="https://www.facebook.com/groups/maladifusion/" target="_blank" rel="noopener">Comunidad en Facebook</a></span></li>
         <li><span class="k">YouTube</span><span class="v"><a href="https://www.youtube.com/@SomosMalaDifusion" target="_blank" rel="noopener">@SomosMalaDifusion</a></span></li>
-        <!-- [[PENDIENTE: confirmar handles reales de Instagram y TikTok antes de enlazar]] -->
+        <!-- [[PENDIENTE: confirmar handles reales de Instagram y TikTok]] -->
         <li><span class="k">Instagram</span><span class="v"><span class="por-confirmar">por confirmar</span></span></li>
         <li><span class="k">TikTok</span><span class="v"><span class="por-confirmar">por confirmar</span></span></li>
       </ul>
@@ -413,29 +399,27 @@
 
 </main>
 
-<!-- ========================== FOOTER ========================== -->
+<!-- ===================== FOOTER ===================== -->
+<div class="checker" aria-hidden="true"></div>
 <footer class="site">
   <div class="wrap foot-inner">
     <div class="foot-brand">
-      <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
-        <path d="M8 26 L34 16 L34 48 L8 38 Z"/>
-        <path d="M34 20 C46 22 52 27 52 32 C52 37 46 42 34 44 Z"/>
-        <rect x="14" y="38" width="7" height="14"/>
-      </svg>
-      <span class="display mark">MALA<span class="di">DIFUSIÓN</span></span>
+      <span class="brand-badge"><img src="logo-mala-difusion-circular.jpg" alt="Mala Difusión" width="64" height="64"></span>
+      <span class="lm">No somos los mejores, pero somos los más guapos.</span>
     </div>
     <div class="foot-meta">
-      <div><em>No somos los mejores, pero somos los más guapos.</em></div>
-      <div>Santiago de Chile · <a href="mailto:somosmaladifusion@gmail.com">somosmaladifusion@gmail.com</a></div>
+      Santiago de Chile<br>somosmaladifusion@gmail.com
     </div>
   </div>
 </footer>
 
 <script>
-  // Revelado al entrar en pantalla. Sin listeners de scroll (usa IntersectionObserver).
   (function(){
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var items = document.querySelectorAll(".reveal");
+    // logo del hero: golpe de entrada
+    var logo = document.querySelector(".hero-logo");
+    if (logo && !reduce){ logo.classList.add("in-logo"); }
+    var items = document.querySelectorAll(".fly");
     if (reduce || !("IntersectionObserver" in window)){
       items.forEach(function(el){ el.classList.add("in"); });
       return;
@@ -444,7 +428,7 @@
       entries.forEach(function(e){
         if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
       });
-    }, { threshold:0.15 });
+    }, { threshold:0.12 });
     items.forEach(function(el){ io.observe(el); });
   })();
 </script>
