@@ -143,7 +143,9 @@
   .laminas{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
   .lamina{ background:var(--crema); color:var(--negro); border:3px solid var(--negro);
     box-shadow:6px 6px 0 rgba(0,0,0,0.55); padding:22px 20px; min-height:150px;
-    display:flex; flex-direction:column; justify-content:space-between; }
+    display:flex; flex-direction:column; justify-content:space-between;
+    transition:transform .18s var(--pop), box-shadow .18s var(--ease); }
+  .lamina:hover{ transform:translate(-3px,-4px) rotate(0deg); box-shadow:10px 12px 0 rgba(0,0,0,0.55); }
   .lamina:nth-child(odd){ transform:rotate(-1.4deg); }
   .lamina:nth-child(even){ transform:rotate(1.4deg); }
   .lamina .tag{ font-family:var(--impact); font-weight:800; text-transform:uppercase; font-size:13px; letter-spacing:0.08em; color:var(--naranjo); }
@@ -156,24 +158,37 @@
   @media (max-width:520px){ .laminas{ grid-template-columns:1fr; } }
 
   /* archivo */
-  .archivo-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:40px; align-items:center; }
-  .archivo h2{ font-size:clamp(40px,6vw,74px); margin:0; }
-  .archivo p{ color:var(--crema-2); max-width:44ch; }
-  .stamps-fest{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 26px; }
+  .archivo-lead{ text-align:center; max-width:58ch; margin:0 auto; color:var(--crema-2); }
+  .stamps-fest{ display:flex; flex-wrap:wrap; gap:12px; margin:22px 0 0; }
   .fest{ font-family:var(--impact); font-weight:800; text-transform:uppercase; letter-spacing:0.03em; font-size:14px;
     color:var(--crema); background:var(--negro); border:2px solid var(--naranjo); padding:10px 14px; transform:rotate(-2deg);
     box-shadow:3px 3px 0 rgba(0,0,0,0.5); }
   .fest:nth-child(2){ transform:rotate(1.5deg); }
   .fest:nth-child(3){ transform:rotate(-1deg); }
-  .tv{ background:var(--crema); border:4px solid var(--negro); box-shadow:8px 8px 0 rgba(0,0,0,0.55); padding:16px; }
-  .tv .screen{ aspect-ratio:4/3; background:
-      repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 3px, transparent 3px 6px),
-      radial-gradient(120% 120% at 50% 20%, #201a15, #0c0b0a);
-    display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; border:2px solid var(--negro); }
-  .tv .screen span{ color:var(--crema-mute); font-size:14px; max-width:24ch; }
-  .tv .knobs{ display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
-  .tv .knobs i{ width:16px; height:16px; border-radius:50%; background:var(--negro); display:block; }
-  @media (max-width:820px){ .archivo-grid{ grid-template-columns:1fr; } }
+  .archivo-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:26px; }
+
+  /* tira de cine (filmstrip) */
+  .reel-wrap{ position:relative; margin-top:46px; background:var(--negro-2); border-block:3px solid var(--negro-3); overflow:hidden; }
+  .reel-edge{ height:16px; background-color:#0e0c0a;
+    background-image:repeating-linear-gradient(90deg, transparent 0 14px, rgba(230,222,208,0.22) 14px 24px, transparent 24px 38px); }
+  .reel{ display:flex; gap:16px; width:max-content; padding:18px 16px;
+    animation:reel 70s linear infinite; }
+  .reel:hover{ animation-play-state:paused; }
+  @keyframes reel{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .frame{ flex:0 0 auto; width:300px; color:var(--crema); text-decoration:none; }
+  .frame .pic{ position:relative; aspect-ratio:16/9; border:3px solid var(--negro); background:#000;
+    box-shadow:6px 6px 0 rgba(0,0,0,0.5); overflow:hidden; }
+  .frame .pic img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s var(--ease); }
+  .frame:hover .pic img{ transform:scale(1.08); }
+  .frame .play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .frame .play i{ width:56px; height:56px; border-radius:50%; background:var(--naranjo); border:3px solid var(--crema);
+    display:flex; align-items:center; justify-content:center; box-shadow:3px 3px 0 rgba(0,0,0,0.5); transition:transform .2s var(--pop); }
+  .frame:hover .play i{ transform:scale(1.12); }
+  .frame .play i::after{ content:""; margin-left:5px; border-left:17px solid var(--negro);
+    border-top:11px solid transparent; border-bottom:11px solid transparent; }
+  .frame .cap{ display:block; font-size:13px; color:var(--crema-2); margin-top:10px; line-height:1.25; }
+  @media (prefers-reduced-motion: reduce){ .reel{ animation:none; } .reel-wrap{ overflow-x:auto; } }
+  @media (max-width:520px){ .frame{ width:230px; } }
 
   /* cartelera */
   .cartelera{ text-align:center; }
@@ -246,16 +261,13 @@
 <!-- ===================== NAV ===================== -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand-badge" href="#top" aria-label="Mala Difusión, inicio">
-      <img src="logo-mala-difusion-circular.jpg" alt="Mala Difusión" width="64" height="64">
-    </a>
     <nav class="nav-links" aria-label="Principal">
       <a href="#manifiesto">Quiénes somos</a>
       <a href="#hacemos">Qué hacemos</a>
       <a href="#archivo">Archivo</a>
       <a href="#contacto">Contacto</a>
-      <a class="btn btn-primary nav-cta" href="#comunidad">La comunidad</a>
     </nav>
+    <a class="btn btn-primary nav-cta" href="#comunidad">La comunidad</a>
   </div>
 </header>
 
@@ -317,27 +329,27 @@
 
 <!-- ===================== ARCHIVO ===================== -->
 <section class="sec archivo" id="archivo">
-  <div class="wrap archivo-grid">
-    <div class="fly left">
-      <span class="eye" style="font-family:var(--script);font-size:clamp(20px,2.4vw,30px);color:var(--naranjo-hi);display:block;transform:rotate(-2deg);">El archivo</span>
-      <h2 class="display">Todo el archivo está en YouTube</h2>
-      <p>Tocatas completas, festivales, backstages y entrevistas de la escena punk, ska, rock, hardcore y metal chilena.</p>
-      <div class="stamps-fest">
-        <span class="fest">Fullpro Fest</span>
-        <span class="fest">Barricada Fest</span>
-        <span class="fest">Gran Bienal 2024</span>
-      </div>
-      <a class="btn btn-primary" href="https://www.youtube.com/@SomosMalaDifusion" target="_blank" rel="noopener">Ir al canal</a>
+  <div class="halftone" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head fly up">
+      <span class="eye">El archivo</span>
+      <h2 class="display">Todo está en YouTube</h2>
     </div>
-    <div class="fly right">
-      <div class="tv">
-        <div class="screen">
-          <!-- [[PENDIENTE: reemplazar por un video o foto real de una cobertura]] -->
-          <span>Aquí va un video o una foto real de una cobertura. Pendiente de material del equipo.</span>
-        </div>
-        <div class="knobs" aria-hidden="true"><i></i><i></i></div>
-      </div>
+    <p class="archivo-lead fly up" style="--d:80ms;">Tocatas completas, festivales, backstages y entrevistas de la escena punk, ska, rock, hardcore y metal chilena.</p>
+    <div class="stamps-fest fly up" style="--d:140ms; justify-content:center;">
+      <span class="fest">Fullpro Fest</span>
+      <span class="fest">Barricada Fest</span>
+      <span class="fest">Gran Bienal 2024</span>
     </div>
+    <div class="archivo-cta fly up" style="--d:200ms;">
+      <a class="btn btn-primary" href="https://www.youtube.com/@SomosMalaDifusion" target="_blank" rel="noopener">Ir al canal de YouTube</a>
+      <a class="btn btn-cream" href="https://www.facebook.com/MalaDifusion.cl/videos" target="_blank" rel="noopener">Videos en Facebook</a>
+    </div>
+  </div>
+  <div class="reel-wrap fly up" style="--d:260ms;" aria-label="Videos del canal de YouTube">
+    <div class="reel-edge" aria-hidden="true"></div>
+    <div class="reel" id="reel"></div>
+    <div class="reel-edge" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -430,6 +442,33 @@
       });
     }, { threshold:0.12 });
     items.forEach(function(el){ io.observe(el); });
+  })();
+
+  // Tira de cine: videos REALES del canal de YouTube (miniaturas alojadas en el repo).
+  (function(){
+    var reel = document.getElementById("reel");
+    if (!reel) return;
+    var vids = [
+      { id:"_d533vjo5Ew", t:"Devil Presley en Sala RBX" },
+      { id:"de15gER_5Wg", t:"Caos en Vivo, Gran Bienal 2024" },
+      { id:"RV2CAoCtI8w", t:"Eutanasia en Chile, primer show" },
+      { id:"A4DD9Pt2zdM", t:"Entrevista, Bar Crew Records" },
+      { id:"GpzLg4t5jLw", t:"Los KK, Gran Bienal 2024" },
+      { id:"qsnErcfl2jQ", t:"MONKEYMAN y Revolucionarios Evolucionarios" },
+      { id:"EYxh_w9qIik", t:"Ayllu Baila Ska" },
+      { id:"dqcdLUqIpgU", t:"Panchito's Latin Combos y La NewBand" }
+    ];
+    function card(v){
+      return '<a class="frame" href="https://www.youtube.com/watch?v=' + v.id +
+        '" target="_blank" rel="noopener">' +
+        '<span class="pic"><img loading="lazy" src="thumbs/' + v.id + '.jpg" alt="' + v.t +
+        '"><span class="play"><i></i></span></span>' +
+        '<span class="cap">' + v.t + '</span></a>';
+    }
+    var html = "";
+    vids.forEach(function(v){ html += card(v); });
+    vids.forEach(function(v){ html += card(v); }); // duplicado para bucle continuo
+    reel.innerHTML = html;
   })();
 </script>
 </body>
